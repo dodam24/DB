@@ -8,7 +8,6 @@ td {
 	color: black;
 }
 
-
 </style>
 </head>
 <body>
@@ -52,8 +51,8 @@ td {
 	</tr>
 	
 	<tr>
-		<th>취미</th>
-		<td>
+		<th>취미</th> <!-- name을 모두 "hobby"로 설정했으므로 배열로 인식 -->
+		<td> 
 			<input type="checkbox" name="hobby" id="hobby_read" value="독서">
 			<label for="hobby_read">독서</label>
 			
@@ -85,11 +84,32 @@ td {
 
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="SEND">
+			<input type="button" value="SEND" onclick="check()">
 			<input type="reset" value="CANCEL">
 		</td>
 	</tr>
 </table>
 </form>
+<script type="text/javascript"> <!-- 유효성 검사 -->
+function check(){
+	if(document.personForm.name.value == ""){
+		alert("이름 입력");
+		return;
+	}
+	
+	var check = document.getElementsByName("hobby");
+	var count = 0;
+	for(var i=0; i<check.length; i++){
+		if(check[i].checked) count++;
+	} // for
+		
+	if(count == 0){
+		alert("취미를 선택");
+		return;
+	}
+	
+	document.personForm.submit();
+}
+</script>
 </body>
 </html>
