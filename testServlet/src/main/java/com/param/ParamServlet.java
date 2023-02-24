@@ -27,8 +27,8 @@ public class ParamServlet extends HttpServlet {
 		out.println("<body>");
 		out.println("<h3>");
 		out.println("나의 이름은 " + name + "이고 나이는 " + age + "살이므로 ");
-		if(age >= 20) out.println("성인 입니다.");
-		else out.println("청소년 입니다.");
+			if(age >= 20) out.println("성인 입니다.");
+			else out.println("청소년 입니다.");
 		out.println("</h3>");
 		out.println("</body>");
 		out.println("</html>");
