@@ -24,8 +24,18 @@ public class MemberDAO {
 		return memberDAO;
 	}
 	
-	private static void close(Connection conn, PreparedStatement pstmt) {
+	public static void close(Connection conn, PreparedStatement pstmt) {
 		try {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			if(rs != null) rs.close();
 			if(pstmt != null) pstmt.close();
 			if(conn != null) conn.close();
 		} catch (SQLException e) {
@@ -89,6 +99,27 @@ public class MemberDAO {
 		
 	}
 
-
-
+	public String memberLogin(String id, String pwd){
+		String name = null;
+		String sql = "SELECT * FROM MEMBER where id=? and pwd=?";
+		getConnection(); //접속
+		try {
+			pstmt = conn.prepareStatement(sql); //SQL문장을 처리해주는 가이드 역할
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			rs = pstmt.executeQuery(); //ResultSet 리턴
+			
+			if(rs.next()) {
+				name = rs.getString("name"); //필요한 이름을 name에 보관
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MemberDAO.close(conn, pstmt, rs);
+		}
+		
+		return name;
 	}
+
+
+}
