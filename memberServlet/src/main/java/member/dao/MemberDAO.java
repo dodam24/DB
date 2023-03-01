@@ -91,7 +91,7 @@ public class MemberDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			MemberDAO.close(conn, pstmt);
 		}
 		
