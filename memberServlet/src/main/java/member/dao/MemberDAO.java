@@ -18,40 +18,27 @@ public class MemberDAO {
 	private String username = "C##jAVA";
 	private String password = "1234";
 	
-	private static MemberDAO memberDAO = new MemberDAO();
+	
+	private static MemberDAO memberDAO = new MemberDAO(); //static은 메모리에 한 번만 생성 
+	
 	
 	public static MemberDAO getInstance() {
 		return memberDAO;
 	}
 	
-	public static void close(Connection conn, PreparedStatement pstmt) {
-		try {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
-		try {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+	
+
+	
 	
 	public MemberDAO() {
 		try {
-			Class.forName(driver); // Class타입으로 생성
+			Class.forName(driver);
 			System.out.println("driver loading 성공");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	} 
+	
 	
 	public void getConnection() {
 		try {
@@ -62,6 +49,7 @@ public class MemberDAO {
 		}
 		
 	}
+	
 	
 	public int memberWrite(MemberDTO memberDTO) {
 		int su = 0;
@@ -99,10 +87,13 @@ public class MemberDAO {
 		
 	}
 
+	
 	public String memberLogin(String id, String pwd){
 		String name = null;
 		String sql = "SELECT * FROM MEMBER where id=? and pwd=?";
+		
 		getConnection(); //접속
+		
 		try {
 			pstmt = conn.prepareStatement(sql); //SQL문장을 처리해주는 가이드 역할
 			pstmt.setString(1, id);
@@ -119,6 +110,26 @@ public class MemberDAO {
 		}
 		
 		return name;
+	}
+	
+	public static void close(Connection conn, PreparedStatement pstmt) {
+		try {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 

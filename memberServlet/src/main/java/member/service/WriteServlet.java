@@ -51,11 +51,13 @@ public class WriteServlet extends HttpServlet {
 		memberDTO.setAddr1(addr1);
 		memberDTO.setAddr2(addr2);
 		
+		
 		//DB
 		MemberDAO memberDAO = MemberDAO.getInstance(); //클래스 생성
 		
 		int su = memberDAO.memberWrite(memberDTO); //호출
 			
+		
 		//응답
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter(); //스트림 생성 
@@ -63,10 +65,10 @@ public class WriteServlet extends HttpServlet {
 		out.println("<body>");
 		if(su == 0) {
 			out.println("<h3>회원가입 실패</h3>");
-			out.println("<input type='button' value='뒤로' onclick='history.go(-1);");
+			out.println("<input type='button' value='뒤로' onclick='history.go(-1)'>");
 		}else {
 			out.println("<H3>회원가입 성공</h3>");
-			out.println("<input type='button' value='로그인' onclick=\"location.href='http://localhost:8080/memberServlet/member/loginForm.html'\">");
+			out.println("<input type='button' value='로그인' onclick=location.href='http://localhost:8080/memberServlet/member/loginForm.html'>");
 		out.println("</body>");
 		out.println("</html>");
 		}

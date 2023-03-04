@@ -22,6 +22,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//데이터
 		request.setCharacterEncoding("UTF-8"); //post인 경우
+		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		
@@ -39,8 +40,9 @@ public class LoginServlet extends HttpServlet {
 		else {
 			out.println("<h3>" + name + "님 로그인</h3>");
 		}
-		
-		
+		out.println("</html>");
+		out.println("</body>");
+	
 	}
 
 }
