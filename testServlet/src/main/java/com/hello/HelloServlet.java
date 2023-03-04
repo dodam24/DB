@@ -23,6 +23,7 @@ public class HelloServlet extends HttpServlet {
 		System.out.println("doGet()");
 		
 		response.setContentType("text/html; charset=UTF-8");
+		
 //		1. 콘솔창에 출력 
 //		System.out.println("<html>");
 //		

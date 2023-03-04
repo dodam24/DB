@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//@WebServlet("/CalcServlet")
 public class CalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -21,9 +22,9 @@ public class CalcServlet extends HttpServlet {
 		
 		// 응답
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter(); // 출력 스트림 생성
 		out.println("<html>");
-		out.println("<body>");
+		out.println("<body style='text-align : center;'>");
 		out.println("<h3>");
 		out.println(x + " + " + y + " = " + (x+y) + "<br>");
 		out.println(x + " - " + y + " = " + (x-y) + "<br>");
