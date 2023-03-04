@@ -29,6 +29,7 @@ public class PersonServlet extends HttpServlet {
 		out.println("<html>");
 		out.println("<body style='background: yellow;'>");
 		out.println("<ul style='border: 1px solid red; color: " + color + "'>");
+		
 		out.println("<li>이 름 : " + name);
 		out.println("<br><br>");
 		
