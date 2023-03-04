@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+
 public class InsertMain {
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -15,6 +16,7 @@ public class InsertMain {
 	private String username = "C##jAVA";
 	private String password = "1234";
 
+	
 	public InsertMain() {
 		try {
 			Class.forName(driver); // Class타입으로 생성
@@ -23,6 +25,7 @@ public class InsertMain {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void getConnection() {
 		try {
@@ -33,14 +36,19 @@ public class InsertMain {
 		}
 	}
 	
+	
 	public void insertArticle() {
 		Scanner scan = new Scanner(System.in);
+		
 		System.out.print("이름 입력 : ");
 		String name = scan.next();
+		
 		System.out.print("나이 입력 : ");
 		int age = scan.nextInt();
+		
 		System.out.print("키 입력 : ");
 		double height = scan.nextDouble();
+		//------------------------------------
 		
 		this.getConnection(); // 접속
 		
@@ -48,6 +56,7 @@ public class InsertMain {
 		
 		try{
 			pstmt = conn.prepareStatement(sql); // 생성
+			
 			// ?에 데이터 대입
 			pstmt.setString(1, name);
 			pstmt.setInt(2, age);
@@ -59,7 +68,7 @@ public class InsertMain {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
+				try {
 				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 			} catch (SQLException e) {

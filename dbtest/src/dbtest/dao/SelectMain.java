@@ -16,14 +16,16 @@ public class SelectMain {
 	private String username = "C##jAVA";
 	private String password = "1234";
 	
+	
 	public SelectMain() { // 드라이버 로딩
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName(driver);
 //			System.out.println("driver loading 성공");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void getConnection() { // 접속
 		try {
@@ -33,6 +35,7 @@ public class SelectMain {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void selectArticle() {
 		getConnection(); // 접속
@@ -63,9 +66,10 @@ public class SelectMain {
 		}
 	}	
 		
+	
 	public static void main(String[] args) {
-		UpdateMain um = new UpdateMain();
-		um.UpdateArticle();
+		SelectMain sm = new SelectMain();
+		sm.selectArticle();
 
 	}
 }
