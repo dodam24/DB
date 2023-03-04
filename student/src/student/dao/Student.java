@@ -20,7 +20,7 @@ public class Student {
 	
 	public Student() {
 		try {
-			Class.forName(driver); // Class타입으로 생성
+			Class.forName(driver);
 			System.out.println("driver loading 성공");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
