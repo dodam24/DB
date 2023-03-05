@@ -48,6 +48,7 @@ public class MemberDAO {
 		int su = 0;
 		
 		this.getConnection();
+		
 		String sql = "INSERT INTO MEMBER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
 		
 		try {
@@ -100,6 +101,42 @@ public class MemberDAO {
 		}
 		
 		return name;
+	}
+	
+	public int memberUpdate(MemberDTO memberDTO) {
+		int su =0;
+		
+		getConnection();
+		
+		String sql = "UPDATE MEMBER SET NAME=?, PWD=?, GENDER=?, EMAIL1=?, EMAIL2=?, "
+				+ "TEL1=?, TEL2=?, TEL3=?, ZIPCODE=?, ADDR1=?, ADDR2=?, WHERE ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getId());
+			pstmt.setString(3, memberDTO.getPwd());
+			pstmt.setString(4, memberDTO.getGender());
+			pstmt.setString(5, memberDTO.getEmail1());
+			pstmt.setString(6, memberDTO.getEmail2());
+			pstmt.setString(7, memberDTO.getTel1());
+			pstmt.setString(8, memberDTO.getTel2());
+			pstmt.setString(9, memberDTO.getTel3());
+			pstmt.setString(10, memberDTO.getZipcode());
+			pstmt.setString(11, memberDTO.getAddr1());
+			pstmt.setString(12, memberDTO.getAddr2());
+			
+			su = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MemberDAO.close(conn, pstmt);
+		}
+		
+		return su;
+		
 	}
 	
 	private static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
