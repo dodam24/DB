@@ -88,7 +88,7 @@ public class MemberDAO {
 	
 	public String memberLogin(String id, String pwd) {
 		String name = null;
-		String sql = "SELECT * FROM MEMBER where id=? and pwd=?";
+		String sql = "SELECT * FROM MEMBER WHERE id=? AND pwd=?";
 		
 		getConnection(); //접속
 		
