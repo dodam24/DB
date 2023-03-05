@@ -86,7 +86,7 @@ public class MemberDAO {
 	}
 
 	
-	public String memberLogin(String id, String pwd){
+	public String memberLogin(String id, String pwd) {
 		String name = null;
 		String sql = "SELECT * FROM MEMBER where id=? and pwd=?";
 		
