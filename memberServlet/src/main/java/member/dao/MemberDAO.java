@@ -53,7 +53,7 @@ public class MemberDAO {
 		int su = 0;
 		
 		this.getConnection(); //접속
-		String sql = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		String sql = "INSERT INTO MBMBER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql); //생성
