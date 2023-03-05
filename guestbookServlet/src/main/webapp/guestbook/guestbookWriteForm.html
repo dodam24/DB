@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+div {
+color: red;
+font-size: 8pt;
+font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+<form name="guestbookWriteForm" method="post" action="/guestbookServlet/GuestbookWriteServlet">
+<table border="1" cellpadding="5" cellspacing="0">
+	<tr>
+		<th>작성자</th>
+		<td>
+		<input type="text" name="name" id="name" placeholder="작성자 입력">
+		<div id="nameDiv"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>이메일</th>
+		<td>
+		<input type="email" name="email" id="email" placeholder="이메일 입력">
+		<div id="emailDiv"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>홈페이지</th>
+		<td>
+		<input type="text" name="homepage" id="homepage" value="http://">
+		<div id="homepageDiv"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>제목</th>
+		<td>
+		<input type="text" name="subject" id="subject" placeholder="제목 입력">
+		<div id="subjectDiv"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>내용</th>
+		<td>
+		<textarea name="content" id="content"><</textarea>
+		<div id="contentDiv"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" style="text-align:center;">
+		<input type="button" value="글작성" onclick="createContent()">
+		<input type="reset" value="다시작성">
+		<button type="button" onclick="location.href='guestbookSearch.html'">글검색</button>
+		<button type="button" name="list" onclick="location.href='/guestbookServlet/GuestbookListServlet?pg=1'"></button>
+		</td>
+	</tr>
+
+</table>>
+</form>
+<script type="text/javascript" src="../js/guestbook.js"></script>
+</body>
+</html>
