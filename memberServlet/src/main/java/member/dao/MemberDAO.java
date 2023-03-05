@@ -27,8 +27,6 @@ public class MemberDAO {
 	}
 	
 	
-
-	
 	
 	public MemberDAO() {
 		try {
