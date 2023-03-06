@@ -63,8 +63,8 @@ div {
 		<td>
 		<input type="email" name="email1" style="width: 120px">
 		@
-		<input type="email" name="email2" style="width: 120px">
-		<select name="email3" style="width: 120px" onchange="select()">
+		<input type="email" name="email2" id="email2" style="width: 120px">
+		<select name="email3" id="email3" style="width: 120px" onchange="select()">
 			<option value="">직접입력</option>
 			<option value="gmail.com">gmail.com</option>
 			<option value="naver.com">naver.com</option>

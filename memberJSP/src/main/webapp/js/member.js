@@ -1,8 +1,9 @@
-function select(){
-	document.writeForm.email2.value = document.writeForm.email3.value
+function select() {
+	//document.writeForm.email2.value = document.writeForm.email3.value
+	document.geetElementById("email2").value = document.getElementById("email3").value;
 }
 
-function checkWrite(){
+function checkWrite() {
 	
 	document.getElementById("nameDiv").innerText = "";
 	document.getElementById("idDiv").innerText = "";
@@ -19,6 +20,22 @@ function checkWrite(){
 		
 	else
 		document.writeForm.submit();
+		
+}
+
+function checkUpdate() {
+	document.getElementById("nameDiv").innerText = "";
+	document.getElementById("pwdDiv").innerText = "";
+	
+	if(document.getElementById("name").value == "")
+		document.getElementById("nameDiv").innerText = "이름 입력";
+	else if(document.getElementById("pwd").value == "")
+		document.getElementById("pwdDiv").innerText = "비밀번호 입력";
+	else if(document.getElementById("pwd").value != document.getElementById("repwd").value)
+		document.getElementById("pwdDiv").innerText = "비밀번호가 맞지 않습니다.";
+		
+	else
+		document.updateForm.submit();
 		
 }
 
