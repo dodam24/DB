@@ -42,7 +42,7 @@
 	border: 1px solid red;
 	padding: 5px 8px; /* top & bottom, left & right */
 	margin: 5px; /* top, right, bottom, left */
-	cusor: pointer;
+	cursor: pointer;
 }
 
 #paging{
