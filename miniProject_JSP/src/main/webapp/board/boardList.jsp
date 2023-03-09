@@ -47,7 +47,7 @@
 
 #paging{
 	color: black;
-	tpaddiing: 5px;
+	padding: 5px;
 	margin: 5px;
 	cursor: pointer;
 	/* border: 1px solid black; */
