@@ -8,17 +8,17 @@
 	//데이터
 	request.setCharacterEncoding("UTF-8");
 	
-	String subject = request.getParameter("subject "); //request와 session(SQL)을 통해 얻어오는 정보가 다름
+	String subject = request.getParameter("subject"); //request와 session(SQL)을 통해 얻어오는 정보가 다름
 	String content = request.getParameter("content");
 	
 	//세션
 	//HttpSession session = request.getSession(); //JSP파일에는 session이라는 내장 객체가 존재하므로 X
 	String id = (String)session.getAttribute("memId");
-	String name =(String)session.getAttribute("memName");
-	String email =(String)session.getAttribute("memEmail"); //boardWrite는 세션을 get (가져오기)
+	String name = (String)session.getAttribute("memName");
+	String email = (String)session.getAttribute("memEmail"); //boardWrite는 세션을 get (가져오기)
 	
 	Map<String, String> map = new HashMap<String, String>();
-	//나중에 map.get("id") 형로 꺼낼 수 있음
+	//나중에 map.get("id") 형으로 꺼낼 수 있음
 	map.put("id", id);
 	map.put("name", name);
 	map.put("email", email);

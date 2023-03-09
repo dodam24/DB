@@ -1,13 +1,17 @@
 package board.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import board.bean.BoardDTO;
 import board.dao.BoardDAO;
@@ -17,10 +21,7 @@ public class BoardDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private String driver = "oracl.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String username = "c##java";
-	private String password = "1234";
+	private DataSource ds;
 	
 	private static BoardDAO boardDAO = new BoardDAO();
 	
@@ -52,29 +53,25 @@ public class BoardDAO {
 	
 	
 	public BoardDAO() {
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	     try {
+	         Context ctx = new InitialContext();//생성
+	         ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");//TOMCAT의 경우일때만 java:comp/env/붙여야 함.
+	      } catch (NamingException e) {
+	         e.printStackTrace();
+	      }
 		
 	}
 	
-	public void getConnection() {
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+	
 	
 	public void boardWrite(Map<String, String> map) {
-		String sql = "insert into board(insert into board(seq, id, name, email, subject, content, ref)"
+		String sql = "insert into board(seq, id, name, email, subject, content, ref)"
 				+ " values(seq_board.nextval, ?, ?, ?, ?, ?, seq_board.currval)";
+		int su=0;
 		
-		getConnection();
 		try {
+			conn= ds.getConnection();
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, map.get("id"));
 			pstmt.setString(2, map.get("name"));
@@ -82,7 +79,7 @@ public class BoardDAO {
 			pstmt.setString(4, map.get("subject"));
 			pstmt.setString(5, map.get("content"));
 			
-			pstmt.executeUpdate();
+			su = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,8 +93,9 @@ public class BoardDAO {
 		
 		String sql = "select * from board order by ref desc, step asc";
 		
-		getConnection();
 		try {
+			conn= ds.getConnection();
+			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery(); //실행 시, 모든 결과값을 ResultSet으로 리턴
 		
@@ -130,14 +128,16 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public int getTotalA() {
+	public int getTotalA() { //총 글수
 		int totalA = 0;
 		String sql = "select count(*) from board";
 		
-		getConnection();
 		try {
+			conn= ds.getConnection();
+			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
 			rs.next();
 			totalA = rs.getInt(1);
 		} catch (SQLException e) {
@@ -145,6 +145,7 @@ public class BoardDAO {
 		} finally {
 			BoardDAO.close(conn, pstmt);
 		}
+		
 		return totalA;
 		
 		

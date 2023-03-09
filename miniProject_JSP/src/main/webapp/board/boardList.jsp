@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="board.bean.BoardPaging" %>
 <%@ page import="board.bean.BoardDTO" %>
 <%@ page import="board.dao.BoardDAO" %>
 <%@ page import="java.util.ArrayList" %>
@@ -7,27 +8,22 @@
 <%@ page import="java.util.List" %>
 <% 
 	//데이터
-	 
-	
-	//페이징 처리
 	int pg = Integer.parseInt(request.getParameter("pg"));
-
-	int endNum = pg*5;
-	int startNum = endNum-4;
-	
+	 
 	//DB
 	BoardDAO boardDAO = BoardDAO.getInstance();
-	List<BoardDTO> list = boardDAO.boardList(startNum, endNum); //부모=자식(다형성)
-	//ArrayList<BoardDTO> list = boardDAO.boardList(); 1:1관계 
+	List<BoardDTO> list = boardDAO.boardList(); //부모=자식(다형성)
 	
+	//페이징 처리
+	int totalA = boardDAO.getTotalA(); //총 글수
+	BoardPaging boardPaging = new BoardPaging();
+	boardPaging.setCurrentPage(pg);
+	boardPaging.setPageBlock(3);
+	boardPaging.setPageSize(5);
+	boardPaging.setTotalA(totalA);
+	boardPaging.makePagingHTML();
 	
-	//총 글수
-	int totalA = boardDAO.getTotalA();
-	
-	
-	//총 페이지수
-	int totalP = (totalA+4) / 5;
-	//1페이지당 5개의 게시글 : totalPage = (총 글수+4)/5
+
 		
 %>
 <!DOCTYPE html>
@@ -40,9 +36,29 @@
 .subjectA:visited { color: black; text-decoration: none; }
 .subjectA:hover { color: green; text-decoration: underline; }
 .subjectA:active { color: black; text-decoration: none; }
+
+#currentPaging{
+	color: red;
+	border: 1px solid red;
+	padding: 5px 8px; /* top & bottom, left & right */
+	margin: 5px; /* top, right, bottom, left */
+	cusor: pointer;
+}
+
+#paging{
+	color: black;
+	tpaddiing: 5px;
+	margin: 5px;
+	cursor: pointer;
+	/* border: 1px solid black; */
+}
+
 </style>
 </head>
 <body>
+<h3>
+<img src="">
+</h3>
 <table border="1" cellpadding="5" cellspacing="0" frame="hsides" rules="rows">
 	<tr>
 		<th width="100">글번호</th>
@@ -65,7 +81,14 @@
 		<%} //for %>
 	<%} //for %>
 </table>
-<img src="../image/img.jpeg" width="50" height="50" alt="라인" 
-onclick="location.href='../index.jsp'" style="cursor: pointer;">
+<div style="margin-top: 15px; width: 850px; text-align: center;">
+	<%=boardPaging.getPagingHTML() %>
+</div>
+
+<script type="text/javascript">
+function boardPaging(pg){
+	location.href="boardList.jsp?pg=" + pg;
+}
+</script>
 </body>
 </html>
