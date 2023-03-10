@@ -28,21 +28,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/webapp/img/img2.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Downloads/img2.jpeg</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/img/img3.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Downloads/img3.jpeg</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/img/naver.png</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Downloads/naver.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
