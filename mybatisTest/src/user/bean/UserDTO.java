@@ -1,5 +1,6 @@
 package user.bean;
 
+
 public class UserDTO {
 	private String name;
 	private String id;
@@ -23,7 +24,6 @@ public class UserDTO {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
 	
 	
 }

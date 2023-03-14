@@ -2,6 +2,9 @@ package user.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Array;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,16 +12,20 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import user.bean.UserDTO;
+import user.service.ArrayList;
 
 public class UserDAO {
 	private SqlSessionFactory sqlSessionFactory;
+	private static UserDAO userDAO = new UserDAO();
 	
-	public UserDAO() {
-		//Reader reader = Resources.getResourceAsReader("mybatis-config.xml"); //Reader는 추상클래스
-		
-		InputStream inputStream;
+	public static UserDAO getInstance() {
+		return userDAO;
+	}
+	
+	public UserDAO() {	
 			try {
-				inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+				//Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+				InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
 				
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			} catch (IOException e) {
@@ -33,4 +40,27 @@ public class UserDAO {
 		sqlSession.commit();
 		sqlSession.close();
 	}
+
+	public List<UserDTO> getUserList() {
+		SqlSession sqlSession = sqlSessionFactory.openSession(); //생성
+		List<UserDTO> list = sqlSession.selectList("userSQL.getUserList");
+		sqlSession.close();
+		return list;
+	}
+
+	public UserDTO getUser(String id) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(); //생성
+		UserDTO userDTO = sqlSession.selectOne("userSQL.getUser", id);
+		sqlSession.close();	
+		return userDTO;
+	}
+
+	public void update(Map<String, String> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(); //생성
+		sqlSession.update("", map);
+		sqlSession.commit();
+		sqlSession.close();
+	}
+
+
 }

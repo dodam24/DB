@@ -26,7 +26,7 @@ public class UserInsertService implements UserService {
 		userDTO.setPwd(pwd);
 		
 		//DB
-		UserDAO userDAO = new UserDAO();
+		UserDAO userDAO = UserDAO.getInstance(); //싱글톤
 		userDAO.write(userDTO);
 		
 		System.out.println("데이터를 저장하였습니다.");
